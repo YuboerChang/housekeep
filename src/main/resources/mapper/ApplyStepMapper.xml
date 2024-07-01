@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.coolers.housekeep.housekeep.dao.ApplyStepMapper">
+  <resultMap id="BaseResultMap" type="com.coolers.housekeep.housekeep.po.ApplyStep">
+    <id column="apply_id" jdbcType="INTEGER" property="applyId" />
+    <id column="step_id" jdbcType="TINYINT" property="stepId" />
+    <result column="worker" jdbcType="INTEGER" property="worker" />
+    <result column="opinion" jdbcType="VARCHAR" property="opinion" />
+    <result column="readers" jdbcType="VARCHAR" property="readers" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from apply_step
+    where apply_id = #{applyId,jdbcType=INTEGER}
+      and step_id = #{stepId,jdbcType=TINYINT}
+  </delete>
+  <insert id="insert" parameterType="com.coolers.housekeep.housekeep.po.ApplyStep">
+    insert into apply_step (apply_id, step_id, worker, 
+      opinion, readers)
+    values (#{applyId,jdbcType=INTEGER}, #{stepId,jdbcType=TINYINT}, #{worker,jdbcType=INTEGER}, 
+      #{opinion,jdbcType=VARCHAR}, #{readers,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.coolers.housekeep.housekeep.po.ApplyStep">
+    update apply_step
+    set worker = #{worker,jdbcType=INTEGER},
+      opinion = #{opinion,jdbcType=VARCHAR},
+      readers = #{readers,jdbcType=VARCHAR}
+    where apply_id = #{applyId,jdbcType=INTEGER}
+      and step_id = #{stepId,jdbcType=TINYINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select apply_id, step_id, worker, opinion, readers
+    from apply_step
+    where apply_id = #{applyId,jdbcType=INTEGER}
+      and step_id = #{stepId,jdbcType=TINYINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select apply_id, step_id, worker, opinion, readers
+    from apply_step
+  </select>
+</mapper>

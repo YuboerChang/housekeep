@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.coolers.housekeep.housekeep.dao.ApplyTemplateMapper">
+  <resultMap id="BaseResultMap" type="com.coolers.housekeep.housekeep.po.ApplyTemplate">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="introduce" jdbcType="VARCHAR" property="introduce" />
+    <result column="creator_id" jdbcType="VARCHAR" property="creatorId" />
+    <result column="is_valid" jdbcType="BIT" property="isValid" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from apply_template
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.coolers.housekeep.housekeep.po.ApplyTemplate">
+    insert into apply_template (id, name, introduce, 
+      creator_id, is_valid, create_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{introduce,jdbcType=VARCHAR}, 
+      #{creatorId,jdbcType=VARCHAR}, #{isValid,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.coolers.housekeep.housekeep.po.ApplyTemplate">
+    update apply_template
+    set name = #{name,jdbcType=VARCHAR},
+      introduce = #{introduce,jdbcType=VARCHAR},
+      creator_id = #{creatorId,jdbcType=VARCHAR},
+      is_valid = #{isValid,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, name, introduce, creator_id, is_valid, create_time
+    from apply_template
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, name, introduce, creator_id, is_valid, create_time
+    from apply_template
+  </select>
+</mapper>

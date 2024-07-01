@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.coolers.housekeep.housekeep.dao.ApplyTemplateStepMapper">
+  <resultMap id="BaseResultMap" type="com.coolers.housekeep.housekeep.po.ApplyTemplateStep">
+    <id column="template_id" jdbcType="INTEGER" property="templateId" />
+    <id column="step_id" jdbcType="TINYINT" property="stepId" />
+    <result column="next_step_id" jdbcType="TINYINT" property="nextStepId" />
+    <result column="participants" jdbcType="CHAR" property="participants" />
+    <result column="introduce" jdbcType="VARCHAR" property="introduce" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from apply_template_step
+    where template_id = #{templateId,jdbcType=INTEGER}
+      and step_id = #{stepId,jdbcType=TINYINT}
+  </delete>
+  <insert id="insert" parameterType="com.coolers.housekeep.housekeep.po.ApplyTemplateStep">
+    insert into apply_template_step (template_id, step_id, next_step_id, 
+      participants, introduce)
+    values (#{templateId,jdbcType=INTEGER}, #{stepId,jdbcType=TINYINT}, #{nextStepId,jdbcType=TINYINT}, 
+      #{participants,jdbcType=CHAR}, #{introduce,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.coolers.housekeep.housekeep.po.ApplyTemplateStep">
+    update apply_template_step
+    set next_step_id = #{nextStepId,jdbcType=TINYINT},
+      participants = #{participants,jdbcType=CHAR},
+      introduce = #{introduce,jdbcType=VARCHAR}
+    where template_id = #{templateId,jdbcType=INTEGER}
+      and step_id = #{stepId,jdbcType=TINYINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select template_id, step_id, next_step_id, participants, introduce
+    from apply_template_step
+    where template_id = #{templateId,jdbcType=INTEGER}
+      and step_id = #{stepId,jdbcType=TINYINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select template_id, step_id, next_step_id, participants, introduce
+    from apply_template_step
+  </select>
+</mapper>

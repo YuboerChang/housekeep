@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.coolers.housekeep.housekeep.dao.SMSRecordMapper">
+  <resultMap id="BaseResultMap" type="com.coolers.housekeep.housekeep.po.SMSRecord">
+    <id column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
+    <id column="record_time" jdbcType="TIMESTAMP" property="recordTime" />
+    <result column="template_code" jdbcType="VARCHAR" property="templateCode" />
+    <result column="template_params" jdbcType="VARCHAR" property="templateParams" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="receive_date" jdbcType="VARCHAR" property="receiveDate" />
+    <result column="send_date" jdbcType="VARCHAR" property="sendDate" />
+    <result column="send_state" jdbcType="TINYINT" property="sendState" />
+    <result column="bizid" jdbcType="VARCHAR" property="bizid" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from sms_record
+    where phone_number = #{phoneNumber,jdbcType=VARCHAR}
+      and record_time = #{recordTime,jdbcType=TIMESTAMP}
+  </delete>
+  <insert id="insert" parameterType="com.coolers.housekeep.housekeep.po.SMSRecord">
+    insert into sms_record (phone_number, record_time, template_code, 
+      template_params, content, receive_date, 
+      send_date, send_state, bizid
+      )
+    values (#{phoneNumber,jdbcType=VARCHAR}, #{recordTime,jdbcType=TIMESTAMP}, #{templateCode,jdbcType=VARCHAR}, 
+      #{templateParams,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{receiveDate,jdbcType=VARCHAR}, 
+      #{sendDate,jdbcType=VARCHAR}, #{sendState,jdbcType=TINYINT}, #{bizid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.coolers.housekeep.housekeep.po.SMSRecord">
+    update sms_record
+    set template_code = #{templateCode,jdbcType=VARCHAR},
+      template_params = #{templateParams,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      receive_date = #{receiveDate,jdbcType=VARCHAR},
+      send_date = #{sendDate,jdbcType=VARCHAR},
+      send_state = #{sendState,jdbcType=TINYINT},
+      bizid = #{bizid,jdbcType=VARCHAR}
+    where phone_number = #{phoneNumber,jdbcType=VARCHAR}
+      and record_time = #{recordTime,jdbcType=TIMESTAMP}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select phone_number, record_time, template_code, template_params, content, receive_date, 
+    send_date, send_state, bizid
+    from sms_record
+    where phone_number = #{phoneNumber,jdbcType=VARCHAR}
+      and record_time = #{recordTime,jdbcType=TIMESTAMP}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select phone_number, record_time, template_code, template_params, content, receive_date, 
+    send_date, send_state, bizid
+    from sms_record
+  </select>
+</mapper>

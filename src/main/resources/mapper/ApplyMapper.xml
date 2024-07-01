@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.coolers.housekeep.housekeep.dao.ApplyMapper">
+  <resultMap id="BaseResultMap" type="com.coolers.housekeep.housekeep.po.Apply">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="template_id" jdbcType="INTEGER" property="templateId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="introduce" jdbcType="VARCHAR" property="introduce" />
+    <result column="creator_id" jdbcType="VARCHAR" property="creatorId" />
+    <result column="is_finish" jdbcType="BIT" property="isFinish" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from apply
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.coolers.housekeep.housekeep.po.Apply">
+    insert into apply (id, template_id, name, 
+      introduce, creator_id, is_finish, 
+      create_time)
+    values (#{id,jdbcType=INTEGER}, #{templateId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{introduce,jdbcType=VARCHAR}, #{creatorId,jdbcType=VARCHAR}, #{isFinish,jdbcType=BIT}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.coolers.housekeep.housekeep.po.Apply">
+    update apply
+    set template_id = #{templateId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      introduce = #{introduce,jdbcType=VARCHAR},
+      creator_id = #{creatorId,jdbcType=VARCHAR},
+      is_finish = #{isFinish,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, template_id, name, introduce, creator_id, is_finish, create_time
+    from apply
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, template_id, name, introduce, creator_id, is_finish, create_time
+    from apply
+  </select>
+</mapper>
