@@ -31,4 +31,9 @@ public class UserController {
         return userService.updateUser(req);
     }
 
+    @PostMapping("/getVerificationCode")
+    public SMSRes getVerificationCode(SMSReq req) {
+        return userService.getVerificationCode(req);
+    }
+
 }

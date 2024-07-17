@@ -21,4 +21,12 @@ public class UserConst {
      * 用户手机验证返回状态码，long，3：发送成功
      */
     public static final String SUCCESS = "3";
+    /**
+     * 用户手机验证码位数，6位数
+     */
+    public static final int VERIFICATION_CODE_DIGIT = 6;
+    /**
+     * 用户手机验证码过期时间0，秒
+     */
+    public static final int VERIFICATION_CODE_TIMEOUT = 60;
 }

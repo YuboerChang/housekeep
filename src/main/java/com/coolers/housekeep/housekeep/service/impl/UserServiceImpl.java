@@ -5,7 +5,11 @@ import com.coolers.housekeep.housekeep.dao.UserMapper;
 import com.coolers.housekeep.housekeep.po.User;
 import com.coolers.housekeep.housekeep.service.UserService;
 import com.coolers.housekeep.housekeep.util.Encrypt;
+import com.coolers.housekeep.housekeep.util.MathUtil;
 import com.coolers.housekeep.housekeep.util.Method;
+import com.coolers.housekeep.housekeep.util.RedisUtil;
+import com.coolers.housekeep.housekeep.vo.SMSReq;
+import com.coolers.housekeep.housekeep.vo.SMSRes;
 import com.coolers.housekeep.housekeep.vo.UserReq;
 import com.coolers.housekeep.housekeep.vo.UserRes;
 import org.springframework.beans.BeanUtils;
@@ -18,6 +22,9 @@ import java.security.NoSuchAlgorithmException;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
+
+    @Autowired
+    RedisUtil redisUtil;
 
     @Override
     public UserRes login(UserReq req) {
@@ -81,7 +88,18 @@ public class UserServiceImpl implements UserService {
         return res;
     }
 
+
     public boolean isExist(String id) {
         return Method.isNotEmptyObject(userMapper.selectByPrimaryKey(id));
+    }
+
+    @Override
+    public SMSRes getVerificationCode(SMSReq req) {
+        if (redisUtil.exists(req.getPhone())) {
+            throw new RuntimeException();
+        }
+        String verificationCode = MathUtil.getRandomNum(UserConst.VERIFICATION_CODE_DIGIT);
+        redisUtil.set(req.getPhone(), verificationCode, UserConst.VERIFICATION_CODE_TIMEOUT);
+        return new SMSRes(verificationCode);
     }
 }

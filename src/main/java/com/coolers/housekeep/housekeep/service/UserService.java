@@ -1,5 +1,7 @@
 package com.coolers.housekeep.housekeep.service;
 
+import com.coolers.housekeep.housekeep.vo.SMSReq;
+import com.coolers.housekeep.housekeep.vo.SMSRes;
 import com.coolers.housekeep.housekeep.vo.UserReq;
 import com.coolers.housekeep.housekeep.vo.UserRes;
 
@@ -11,4 +13,7 @@ public interface UserService {
     public UserRes updateUser(UserReq user);
 
     public UserRes unsubscribe(UserReq user);
+
+    public SMSRes getVerificationCode(SMSReq phone);
+
 }

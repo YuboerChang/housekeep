@@ -66,7 +66,7 @@ public class SMS {
     public List<QuerySendDetailsResponseBody.QuerySendDetailsResponseBodySmsSendDetailDTOsSmsSendDetailDTO> checkSendStatus(SMSRecord smsRecord) throws Exception {
         int count = 1;
         List<QuerySendDetailsResponseBody.QuerySendDetailsResponseBodySmsSendDetailDTOsSmsSendDetailDTO> dtos = null;
-        QuerySendDetailsRequest queryReq = new QuerySendDetailsRequest().setPhoneNumber(Common.assertAsString(smsRecord.getPhoneNumber())).setBizId(smsRecord.getBizid()).setSendDate(com.aliyun.darabonbatime.Client.format(FormatConst.YYYYMMDD));
+        QuerySendDetailsRequest queryReq = new QuerySendDetailsRequest().setPhoneNumber(Common.assertAsString(smsRecord.getPhoneNumber())).setBizId(smsRecord.getBizid()).setSendDate(com.aliyun.darabonbatime.Client.format(FormatConst.yyyyMMdd));
         while (count < 4) {
             QuerySendDetailsResponse queryRes = client.querySendDetails(queryReq);
             dtos = queryRes.body.smsSendDetailDTOs.smsSendDetailDTO;

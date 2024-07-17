@@ -5,7 +5,8 @@
 URL:
 https://blog.csdn.net/yubochang/category_12684582.html?spm=1001.2014.3001.5482
 
-前端代码仓库：
+前端代码仓库URL：
+https://github.com/YuboerChang/housekeep-frontend
 
-
-后端代码仓库：
+后端代码仓库URL：
+https://github.com/YuboerChang/housekeep
