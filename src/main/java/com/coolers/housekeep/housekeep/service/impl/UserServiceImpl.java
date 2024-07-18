@@ -1,7 +1,10 @@
 package com.coolers.housekeep.housekeep.service.impl;
 
+import com.coolers.housekeep.housekeep.constant.RetMessage;
+import com.coolers.housekeep.housekeep.constant.RetType;
 import com.coolers.housekeep.housekeep.constant.UserConst;
 import com.coolers.housekeep.housekeep.dao.UserMapper;
+import com.coolers.housekeep.housekeep.dto.BussinessException;
 import com.coolers.housekeep.housekeep.po.User;
 import com.coolers.housekeep.housekeep.service.UserService;
 import com.coolers.housekeep.housekeep.util.Encrypt;
@@ -44,7 +47,7 @@ public class UserServiceImpl implements UserService {
     public UserRes register(UserReq req) {
         UserRes res = new UserRes();
         if (isExist(req.getId())) {
-            res.setMsg(UserConst.USER_EXIST);
+            throw new BussinessException(RetType.BUSSINESS_ERR, RetMessage.USER_EXIST);
         } else {
             User user = new User();
             BeanUtils.copyProperties(req, user);
@@ -72,7 +75,7 @@ public class UserServiceImpl implements UserService {
             userMapper.updateByPrimaryKey(user);
 
         } else {
-            res.setMsg(UserConst.USER_NOT_EXIST);
+            throw new BussinessException(RetType.BUSSINESS_ERR, RetMessage.USER_NOT_EXIST);
         }
         return res;
     }
@@ -83,7 +86,7 @@ public class UserServiceImpl implements UserService {
         if (isExist(req.getId())) {
             userMapper.deleteByPrimaryKey(req.getId());
         } else {
-            res.setMsg(UserConst.USER_NOT_EXIST);
+            throw new BussinessException(RetType.BUSSINESS_ERR, RetMessage.USER_NOT_EXIST);
         }
         return res;
     }
@@ -96,9 +99,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public SMSRes getVerificationCode(SMSReq req) {
         if (redisUtil.exists(req.getPhone())) {
-            throw new RuntimeException();
+            throw new BussinessException(RetType.BUSSINESS_ERR, RetMessage.TOO_OFTEN);
         }
         String verificationCode = MathUtil.getRandomNum(UserConst.VERIFICATION_CODE_DIGIT);
+        // 调用短信发送接口，发送记录入库
+        // SMSRecord.buildParams
+        // SMS.sendMessage(SMSRecord)
         redisUtil.set(req.getPhone(), verificationCode, UserConst.VERIFICATION_CODE_TIMEOUT);
         return new SMSRes(verificationCode);
     }

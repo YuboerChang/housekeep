@@ -2,14 +2,6 @@ package com.coolers.housekeep.housekeep.constant;
 
 public class UserConst {
     /**
-     * 用户注册报错，提示用户已存在
-     */
-    public static final String USER_EXIST = "用户已存在";
-    /**
-     * 用户操作报错，提示用户不存在
-     */
-    public static final String USER_NOT_EXIST = "用户不存在";
-    /**
      * 用户手机验证返回状态码，long，1：等待回执
      */
     public static final String WATTING = "1";
