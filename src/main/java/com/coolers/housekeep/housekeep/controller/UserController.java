@@ -36,4 +36,9 @@ public class UserController {
         return userService.getVerificationCode(req);
     }
 
+    @PostMapping("/queryUsers")
+    public UserRes queryUsers(UserReq req) {
+        return userService.queryUsers(req);
+    }
+
 }

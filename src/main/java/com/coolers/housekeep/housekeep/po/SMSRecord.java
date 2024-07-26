@@ -1,12 +1,6 @@
 package com.coolers.housekeep.housekeep.po;
 
-import java.util.Date;
-
-public class SMSRecord {
-    private String phoneNumber;
-
-    private Date recordTime;
-
+public class SMSRecord extends SMSRecordKey {
     private String templateCode;
 
     private String templateParams;
@@ -20,22 +14,6 @@ public class SMSRecord {
     private Byte sendState;
 
     private String bizid;
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber == null ? null : phoneNumber.trim();
-    }
-
-    public Date getRecordTime() {
-        return recordTime;
-    }
-
-    public void setRecordTime(Date recordTime) {
-        this.recordTime = recordTime;
-    }
 
     public String getTemplateCode() {
         return templateCode;

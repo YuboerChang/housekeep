@@ -1,31 +1,23 @@
 package com.coolers.housekeep.housekeep.po;
 
-public class ApplyStep {
-    private Integer applyId;
+import java.util.Date;
 
-    private Byte stepId;
-
+public class ApplyStep extends ApplyStepKey {
     private Integer worker;
 
     private String opinion;
 
-    private String readers;
+    private String unRead;
 
-    public Integer getApplyId() {
-        return applyId;
-    }
+    private Boolean isFinish;
 
-    public void setApplyId(Integer applyId) {
-        this.applyId = applyId;
-    }
+    private String hasRead;
 
-    public Byte getStepId() {
-        return stepId;
-    }
+    private String introduce;
 
-    public void setStepId(Byte stepId) {
-        this.stepId = stepId;
-    }
+    private Byte templateStepId;
+
+    private Date createTime;
 
     public Integer getWorker() {
         return worker;
@@ -43,11 +35,51 @@ public class ApplyStep {
         this.opinion = opinion == null ? null : opinion.trim();
     }
 
-    public String getReaders() {
-        return readers;
+    public String getUnRead() {
+        return unRead;
     }
 
-    public void setReaders(String readers) {
-        this.readers = readers == null ? null : readers.trim();
+    public void setUnRead(String unRead) {
+        this.unRead = unRead == null ? null : unRead.trim();
+    }
+
+    public Boolean getIsFinish() {
+        return isFinish;
+    }
+
+    public void setIsFinish(Boolean isFinish) {
+        this.isFinish = isFinish;
+    }
+
+    public String getHasRead() {
+        return hasRead;
+    }
+
+    public void setHasRead(String hasRead) {
+        this.hasRead = hasRead == null ? null : hasRead.trim();
+    }
+
+    public String getIntroduce() {
+        return introduce;
+    }
+
+    public void setIntroduce(String introduce) {
+        this.introduce = introduce == null ? null : introduce.trim();
+    }
+
+    public Byte getTemplateStepId() {
+        return templateStepId;
+    }
+
+    public void setTemplateStepId(Byte templateStepId) {
+        this.templateStepId = templateStepId;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

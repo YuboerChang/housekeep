@@ -10,10 +10,12 @@ public interface UserService {
 
     public UserRes register(UserReq req);
 
-    public UserRes updateUser(UserReq user);
+    public UserRes updateUser(UserReq req);
 
-    public UserRes unsubscribe(UserReq user);
+    public UserRes unsubscribe(UserReq req);
 
-    public SMSRes getVerificationCode(SMSReq phone);
+    public SMSRes getVerificationCode(SMSReq req);
+
+    public UserRes queryUsers(UserReq req);
 
 }

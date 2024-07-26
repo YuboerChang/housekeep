@@ -4,5 +4,7 @@ import lombok.Data;
 
 @Data
 public class BaseReq {
-    public String userId;
+    private String userId;
+    private Integer pageSize;
+    private Integer pageNum;
 }

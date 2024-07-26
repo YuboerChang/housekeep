@@ -4,37 +4,193 @@
   <resultMap id="BaseResultMap" type="com.coolers.housekeep.housekeep.po.ApplyTemplateStep">
     <id column="template_id" jdbcType="INTEGER" property="templateId" />
     <id column="step_id" jdbcType="TINYINT" property="stepId" />
-    <result column="next_step_id" jdbcType="TINYINT" property="nextStepId" />
     <result column="participants" jdbcType="CHAR" property="participants" />
     <result column="introduce" jdbcType="VARCHAR" property="introduce" />
   </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="map">
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    template_id, step_id, participants, introduce
+  </sql>
+  <select id="selectByExample" parameterType="com.coolers.housekeep.housekeep.po.ApplyTemplateStepExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from apply_template_step
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.coolers.housekeep.housekeep.po.ApplyTemplateStepKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from apply_template_step
+    where template_id = #{templateId,jdbcType=INTEGER}
+      and step_id = #{stepId,jdbcType=TINYINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.coolers.housekeep.housekeep.po.ApplyTemplateStepKey">
     delete from apply_template_step
     where template_id = #{templateId,jdbcType=INTEGER}
       and step_id = #{stepId,jdbcType=TINYINT}
   </delete>
+  <delete id="deleteByExample" parameterType="com.coolers.housekeep.housekeep.po.ApplyTemplateStepExample">
+    delete from apply_template_step
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
   <insert id="insert" parameterType="com.coolers.housekeep.housekeep.po.ApplyTemplateStep">
-    insert into apply_template_step (template_id, step_id, next_step_id, 
-      participants, introduce)
-    values (#{templateId,jdbcType=INTEGER}, #{stepId,jdbcType=TINYINT}, #{nextStepId,jdbcType=TINYINT}, 
-      #{participants,jdbcType=CHAR}, #{introduce,jdbcType=VARCHAR})
+    insert into apply_template_step (template_id, step_id, participants, 
+      introduce)
+    values (#{templateId,jdbcType=INTEGER}, #{stepId,jdbcType=TINYINT}, #{participants,jdbcType=CHAR}, 
+      #{introduce,jdbcType=VARCHAR})
   </insert>
+  <insert id="insertSelective" parameterType="com.coolers.housekeep.housekeep.po.ApplyTemplateStep">
+    insert into apply_template_step
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="templateId != null">
+        template_id,
+      </if>
+      <if test="stepId != null">
+        step_id,
+      </if>
+      <if test="participants != null">
+        participants,
+      </if>
+      <if test="introduce != null">
+        introduce,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="templateId != null">
+        #{templateId,jdbcType=INTEGER},
+      </if>
+      <if test="stepId != null">
+        #{stepId,jdbcType=TINYINT},
+      </if>
+      <if test="participants != null">
+        #{participants,jdbcType=CHAR},
+      </if>
+      <if test="introduce != null">
+        #{introduce,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.coolers.housekeep.housekeep.po.ApplyTemplateStepExample" resultType="java.lang.Long">
+    select count(*) from apply_template_step
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update apply_template_step
+    <set>
+      <if test="record.templateId != null">
+        template_id = #{record.templateId,jdbcType=INTEGER},
+      </if>
+      <if test="record.stepId != null">
+        step_id = #{record.stepId,jdbcType=TINYINT},
+      </if>
+      <if test="record.participants != null">
+        participants = #{record.participants,jdbcType=CHAR},
+      </if>
+      <if test="record.introduce != null">
+        introduce = #{record.introduce,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update apply_template_step
+    set template_id = #{record.templateId,jdbcType=INTEGER},
+      step_id = #{record.stepId,jdbcType=TINYINT},
+      participants = #{record.participants,jdbcType=CHAR},
+      introduce = #{record.introduce,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.coolers.housekeep.housekeep.po.ApplyTemplateStep">
+    update apply_template_step
+    <set>
+      <if test="participants != null">
+        participants = #{participants,jdbcType=CHAR},
+      </if>
+      <if test="introduce != null">
+        introduce = #{introduce,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where template_id = #{templateId,jdbcType=INTEGER}
+      and step_id = #{stepId,jdbcType=TINYINT}
+  </update>
   <update id="updateByPrimaryKey" parameterType="com.coolers.housekeep.housekeep.po.ApplyTemplateStep">
     update apply_template_step
-    set next_step_id = #{nextStepId,jdbcType=TINYINT},
-      participants = #{participants,jdbcType=CHAR},
+    set participants = #{participants,jdbcType=CHAR},
       introduce = #{introduce,jdbcType=VARCHAR}
     where template_id = #{templateId,jdbcType=INTEGER}
       and step_id = #{stepId,jdbcType=TINYINT}
   </update>
-  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
-    select template_id, step_id, next_step_id, participants, introduce
-    from apply_template_step
-    where template_id = #{templateId,jdbcType=INTEGER}
-      and step_id = #{stepId,jdbcType=TINYINT}
-  </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select template_id, step_id, next_step_id, participants, introduce
-    from apply_template_step
-  </select>
 </mapper>

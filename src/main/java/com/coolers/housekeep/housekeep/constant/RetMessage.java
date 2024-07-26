@@ -17,4 +17,12 @@ public class RetMessage {
      * 用户操作报错，提示用户不存在
      */
     public static final String USER_NOT_EXIST = "用户不存在";
+    /**
+     * 流程模板操作报错，提示流程模板已存在
+     */
+    public static final String TEMPLATE_EXIST = "流程模板已存在";
+    /**
+     * 流程模板操作报错，提示流程模板步骤缺失
+     */
+    public static final String TEMPLATE_STEP_MISS = "流程模板步骤缺失";
 }

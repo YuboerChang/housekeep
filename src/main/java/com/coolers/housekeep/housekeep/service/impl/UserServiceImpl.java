@@ -6,6 +6,7 @@ import com.coolers.housekeep.housekeep.constant.UserConst;
 import com.coolers.housekeep.housekeep.dao.UserMapper;
 import com.coolers.housekeep.housekeep.dto.BussinessException;
 import com.coolers.housekeep.housekeep.po.User;
+import com.coolers.housekeep.housekeep.po.UserExample;
 import com.coolers.housekeep.housekeep.service.UserService;
 import com.coolers.housekeep.housekeep.util.Encrypt;
 import com.coolers.housekeep.housekeep.util.MathUtil;
@@ -108,4 +109,18 @@ public class UserServiceImpl implements UserService {
         redisUtil.set(req.getPhone(), verificationCode, UserConst.VERIFICATION_CODE_TIMEOUT);
         return new SMSRes(verificationCode);
     }
+
+    /**
+     * @param req req.department and req.role not null
+     */
+    @Override
+    public UserRes queryUsers(UserReq req) {
+        UserExample userExample = new UserExample();
+        userExample.createCriteria().andDepartmentEqualTo(req.getDepartment()).andRoleEqualTo(req.getRole());
+        UserRes userRes = new UserRes();
+        userRes.setUsers(userMapper.selectByExample(userExample));
+        return userRes;
+    }
+
+
 }
