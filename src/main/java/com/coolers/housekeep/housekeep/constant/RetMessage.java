@@ -18,6 +18,10 @@ public class RetMessage {
      */
     public static final String USER_NOT_EXIST = "用户不存在";
     /**
+     * 用户操作报错，提示密码错误
+     */
+    public static final String PASSWORD_ERROR = "密码错误";
+    /**
      * 流程模板操作报错，提示流程模板已存在
      */
     public static final String TEMPLATE_EXIST = "流程模板已存在";

@@ -1,7 +1,10 @@
 package com.coolers.housekeep.housekeep.controller;
 
 import com.coolers.housekeep.housekeep.service.UserService;
-import com.coolers.housekeep.housekeep.vo.*;
+import com.coolers.housekeep.housekeep.vo.SMSReq;
+import com.coolers.housekeep.housekeep.vo.SMSRes;
+import com.coolers.housekeep.housekeep.vo.UserReq;
+import com.coolers.housekeep.housekeep.vo.UserRes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;

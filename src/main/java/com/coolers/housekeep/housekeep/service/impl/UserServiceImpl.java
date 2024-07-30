@@ -33,13 +33,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserRes login(UserReq req) {
         User daoUser = userMapper.selectByPrimaryKey(req.getId());
+        if (Method.isEmptyObject(daoUser)) {
+            throw new BussinessException(RetType.BUSSINESS_ERR, RetMessage.USER_EXIST);
+        }
         UserRes res = new UserRes();
         try {
             if (Encrypt.encryptByMD5(req.getPassword()).equals(daoUser.getPassword())) {
                 BeanUtils.copyProperties(daoUser, res);
             }
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
+            throw new BussinessException(RetType.BUSSINESS_ERR, RetMessage.PASSWORD_ERROR);
         }
         return res;
     }

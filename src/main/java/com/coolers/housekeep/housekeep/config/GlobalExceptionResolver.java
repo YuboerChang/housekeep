@@ -38,6 +38,7 @@ public class GlobalExceptionResolver extends DefaultErrorAttributes {
             res.setType(((BussinessException) ex).getErrorType());
             res.setMsg(((BussinessException) ex).getErrorMessage());
         } else {
+
             res.setType(RetType.SYSTEM_ERR);
             res.setMsg(RetMessage.SYS_ERR);
         }
