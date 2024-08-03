@@ -22,6 +22,10 @@ public class RetMessage {
      */
     public static final String PASSWORD_ERROR = "密码错误";
     /**
+     * 用户操作报错，提示密码错误
+     */
+    public static final String TOKEN_LOST = "登录信息已失效";
+    /**
      * 流程模板操作报错，提示流程模板已存在
      */
     public static final String TEMPLATE_EXIST = "流程模板已存在";

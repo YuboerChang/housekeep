@@ -21,6 +21,7 @@ public class GlobalExceptionResolver extends DefaultErrorAttributes {
     @Override
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
                                          Exception ex) {
+        ex.printStackTrace();
         BaseRes res = buildRes(ex);
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setCharacterEncoding(FormatConst.UTF8);
@@ -38,7 +39,6 @@ public class GlobalExceptionResolver extends DefaultErrorAttributes {
             res.setType(((BussinessException) ex).getErrorType());
             res.setMsg(((BussinessException) ex).getErrorMessage());
         } else {
-
             res.setType(RetType.SYSTEM_ERR);
             res.setMsg(RetMessage.SYS_ERR);
         }

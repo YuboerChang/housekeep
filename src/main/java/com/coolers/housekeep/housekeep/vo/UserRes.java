@@ -18,4 +18,5 @@ public class UserRes extends BaseRes {
     private String department;
     private byte[] picture;
     private List<User> users;
+    private String token;
 }

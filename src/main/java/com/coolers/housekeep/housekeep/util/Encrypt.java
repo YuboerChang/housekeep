@@ -2,11 +2,18 @@ package com.coolers.housekeep.housekeep.util;
 
 import com.coolers.housekeep.housekeep.constant.EncryptConst;
 
+import javax.crypto.KeyGenerator;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Base64;
 
 public class Encrypt {
+    private static final String BASE_SECRET_KEY = "this_is_a_base_secret_key";
+    private static final String ENCRYPTION_TYPE_AES = "AES";
+    private static final int KEY_LENGTH = 32;
+
     /**
      * MD5加密算法，不可再次查看加密前文本，仅适用于加密和校验
      */
@@ -18,6 +25,21 @@ public class Encrypt {
             stb.append(String.format(EncryptConst.ENCODE_FORMAT_HEXADECIMAL, bt));
         }
         return stb.toString();
+    }
+
+    /**
+     * 随机获取一个字符串，调用随机工具失败就直接返回基础字符串，不做异常处理
+     */
+    public static String getRandomSecretKey() {
+        String secretKey = "";
+        try {
+            KeyGenerator keyGenerator = KeyGenerator.getInstance(ENCRYPTION_TYPE_AES);
+            keyGenerator.init(KEY_LENGTH, new SecureRandom());
+            secretKey = Base64.getEncoder().encodeToString(keyGenerator.generateKey().getEncoded());
+        } catch (Exception e) {
+            secretKey = BASE_SECRET_KEY;
+        }
+        return secretKey;
     }
 
 }

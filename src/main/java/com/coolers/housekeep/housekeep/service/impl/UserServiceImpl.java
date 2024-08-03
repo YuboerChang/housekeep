@@ -8,10 +8,7 @@ import com.coolers.housekeep.housekeep.dto.BussinessException;
 import com.coolers.housekeep.housekeep.po.User;
 import com.coolers.housekeep.housekeep.po.UserExample;
 import com.coolers.housekeep.housekeep.service.UserService;
-import com.coolers.housekeep.housekeep.util.Encrypt;
-import com.coolers.housekeep.housekeep.util.MathUtil;
-import com.coolers.housekeep.housekeep.util.Method;
-import com.coolers.housekeep.housekeep.util.RedisUtil;
+import com.coolers.housekeep.housekeep.util.*;
 import com.coolers.housekeep.housekeep.vo.SMSReq;
 import com.coolers.housekeep.housekeep.vo.SMSRes;
 import com.coolers.housekeep.housekeep.vo.UserReq;
@@ -21,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -34,15 +33,20 @@ public class UserServiceImpl implements UserService {
     public UserRes login(UserReq req) {
         User daoUser = userMapper.selectByPrimaryKey(req.getId());
         if (Method.isEmptyObject(daoUser)) {
-            throw new BussinessException(RetType.BUSSINESS_ERR, RetMessage.USER_EXIST);
+            throw new BussinessException(RetType.BUSSINESS_ERR, RetMessage.USER_NOT_EXIST);
         }
         UserRes res = new UserRes();
         try {
             if (Encrypt.encryptByMD5(req.getPassword()).equals(daoUser.getPassword())) {
                 BeanUtils.copyProperties(daoUser, res);
+                Map<String, String> userMap = new HashMap<>();
+                userMap.put("userId", res.getId());
+                res.setToken(Token.createToken(userMap));
+            } else {
+                throw new BussinessException(RetType.BUSSINESS_ERR, RetMessage.PASSWORD_ERROR);
             }
         } catch (NoSuchAlgorithmException e) {
-            throw new BussinessException(RetType.BUSSINESS_ERR, RetMessage.PASSWORD_ERROR);
+            throw new BussinessException(RetType.SYSTEM_ERR, RetMessage.SYS_ERR);
         }
         return res;
     }
