@@ -8,8 +8,8 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import java.util.Date;
 import java.util.Map;
 
-public class Token {
-    private static final String SECRET = Encrypt.getRandomSecretKey();
+public class TokenUtil {
+    private static final String SECRET = EncryptUtil.BASE_SECRET_KEY;
 
     // 7天的毫秒数值：1000*60*60*24*7=604800000
     private static final int EXPIRE_DAYS = 604800000;

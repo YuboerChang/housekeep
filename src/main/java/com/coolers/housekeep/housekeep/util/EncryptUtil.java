@@ -9,10 +9,10 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
 
-public class Encrypt {
-    private static final String BASE_SECRET_KEY = "this_is_a_base_secret_key";
-    private static final String ENCRYPTION_TYPE_AES = "AES";
-    private static final int KEY_LENGTH = 32;
+public class EncryptUtil {
+    public static final String BASE_SECRET_KEY = "this_is_a_base_secret_key";
+    public static final String ENCRYPTION_TYPE_AES = "AES";
+    public static final int KEY_LENGTH_32 = 32;
 
     /**
      * MD5加密算法，不可再次查看加密前文本，仅适用于加密和校验
@@ -34,7 +34,7 @@ public class Encrypt {
         String secretKey = "";
         try {
             KeyGenerator keyGenerator = KeyGenerator.getInstance(ENCRYPTION_TYPE_AES);
-            keyGenerator.init(KEY_LENGTH, new SecureRandom());
+            keyGenerator.init(KEY_LENGTH_32, new SecureRandom());
             secretKey = Base64.getEncoder().encodeToString(keyGenerator.generateKey().getEncoded());
         } catch (Exception e) {
             secretKey = BASE_SECRET_KEY;

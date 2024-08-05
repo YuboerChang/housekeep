@@ -2,7 +2,7 @@ package com.coolers.housekeep.housekeep.util;
 
 import java.util.Collection;
 
-public class Method {
+public class BaseUtil {
     public static boolean isEmptyObject(Object object) {
         return object == null;
     }

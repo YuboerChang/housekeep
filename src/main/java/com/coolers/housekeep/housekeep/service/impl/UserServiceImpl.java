@@ -1,7 +1,7 @@
 package com.coolers.housekeep.housekeep.service.impl;
 
-import com.coolers.housekeep.housekeep.constant.RetMessage;
-import com.coolers.housekeep.housekeep.constant.RetType;
+import com.coolers.housekeep.housekeep.constant.RetMsgConst;
+import com.coolers.housekeep.housekeep.constant.RetTypeConst;
 import com.coolers.housekeep.housekeep.constant.UserConst;
 import com.coolers.housekeep.housekeep.dao.UserMapper;
 import com.coolers.housekeep.housekeep.dto.BussinessException;
@@ -32,21 +32,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserRes login(UserReq req) {
         User daoUser = userMapper.selectByPrimaryKey(req.getId());
-        if (Method.isEmptyObject(daoUser)) {
-            throw new BussinessException(RetType.BUSSINESS_ERR, RetMessage.USER_NOT_EXIST);
+        if (BaseUtil.isEmptyObject(daoUser)) {
+            throw new BussinessException(RetTypeConst.BUSSINESS_ERR, RetMsgConst.USER_NOT_EXIST);
         }
         UserRes res = new UserRes();
         try {
-            if (Encrypt.encryptByMD5(req.getPassword()).equals(daoUser.getPassword())) {
+            if (EncryptUtil.encryptByMD5(req.getPassword()).equals(daoUser.getPassword())) {
                 BeanUtils.copyProperties(daoUser, res);
                 Map<String, String> userMap = new HashMap<>();
                 userMap.put("userId", res.getId());
-                res.setToken(Token.createToken(userMap));
+                res.setToken(TokenUtil.createToken(userMap));
             } else {
-                throw new BussinessException(RetType.BUSSINESS_ERR, RetMessage.PASSWORD_ERROR);
+                throw new BussinessException(RetTypeConst.BUSSINESS_ERR, RetMsgConst.PASSWORD_ERROR);
             }
         } catch (NoSuchAlgorithmException e) {
-            throw new BussinessException(RetType.SYSTEM_ERR, RetMessage.SYS_ERR);
+            throw new BussinessException(RetTypeConst.SYSTEM_ERR, RetMsgConst.SYS_ERR);
         }
         return res;
     }
@@ -55,12 +55,12 @@ public class UserServiceImpl implements UserService {
     public UserRes register(UserReq req) {
         UserRes res = new UserRes();
         if (isExist(req.getId())) {
-            throw new BussinessException(RetType.BUSSINESS_ERR, RetMessage.USER_EXIST);
+            throw new BussinessException(RetTypeConst.BUSSINESS_ERR, RetMsgConst.USER_EXIST);
         } else {
             User user = new User();
             BeanUtils.copyProperties(req, user);
             try {
-                user.setPassword(Encrypt.encryptByMD5(user.getPassword()));
+                user.setPassword(EncryptUtil.encryptByMD5(user.getPassword()));
             } catch (NoSuchAlgorithmException e) {
                 throw new RuntimeException(e);
             }
@@ -76,14 +76,14 @@ public class UserServiceImpl implements UserService {
             User user = new User();
             BeanUtils.copyProperties(req, user);
             try {
-                user.setPassword(Encrypt.encryptByMD5(user.getPassword()));
+                user.setPassword(EncryptUtil.encryptByMD5(user.getPassword()));
             } catch (NoSuchAlgorithmException e) {
                 throw new RuntimeException(e);
             }
             userMapper.updateByPrimaryKey(user);
 
         } else {
-            throw new BussinessException(RetType.BUSSINESS_ERR, RetMessage.USER_NOT_EXIST);
+            throw new BussinessException(RetTypeConst.BUSSINESS_ERR, RetMsgConst.USER_NOT_EXIST);
         }
         return res;
     }
@@ -94,20 +94,20 @@ public class UserServiceImpl implements UserService {
         if (isExist(req.getId())) {
             userMapper.deleteByPrimaryKey(req.getId());
         } else {
-            throw new BussinessException(RetType.BUSSINESS_ERR, RetMessage.USER_NOT_EXIST);
+            throw new BussinessException(RetTypeConst.BUSSINESS_ERR, RetMsgConst.USER_NOT_EXIST);
         }
         return res;
     }
 
 
     public boolean isExist(String id) {
-        return Method.isNotEmptyObject(userMapper.selectByPrimaryKey(id));
+        return BaseUtil.isNotEmptyObject(userMapper.selectByPrimaryKey(id));
     }
 
     @Override
     public SMSRes getVerificationCode(SMSReq req) {
         if (redisUtil.exists(req.getPhone())) {
-            throw new BussinessException(RetType.BUSSINESS_ERR, RetMessage.TOO_OFTEN);
+            throw new BussinessException(RetTypeConst.BUSSINESS_ERR, RetMsgConst.TOO_OFTEN);
         }
         String verificationCode = MathUtil.getRandomNum(UserConst.VERIFICATION_CODE_DIGIT);
         // 调用短信发送接口，发送记录入库

@@ -1,6 +1,6 @@
 package com.coolers.housekeep.housekeep.constant;
 
-public class RetMessage {
+public class RetMsgConst {
     /**
      * 系统异常
      */

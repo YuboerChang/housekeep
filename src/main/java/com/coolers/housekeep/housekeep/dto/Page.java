@@ -1,6 +1,6 @@
 package com.coolers.housekeep.housekeep.dto;
 
-import com.coolers.housekeep.housekeep.util.Method;
+import com.coolers.housekeep.housekeep.util.BaseUtil;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,7 +19,7 @@ public class Page {
 
     public void setPageNum(Integer pageNum) {
         this.pageNum = pageNum;
-        if (Method.isNotEmptyMathObject(this.pageSize)) {
+        if (BaseUtil.isNotEmptyMathObject(this.pageSize)) {
             // mysql 偏移量从0页算起
             this.offset = (this.pageNum - 1) * this.pageSize;
         }
@@ -27,7 +27,7 @@ public class Page {
 
     public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
-        if (Method.isNotEmptyMathObject(this.pageNum)) {
+        if (BaseUtil.isNotEmptyMathObject(this.pageNum)) {
             // mysql 偏移量从0页算起
             this.offset = (this.pageNum - 1) * this.pageSize;
         }

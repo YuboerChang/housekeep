@@ -15,12 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SMS {
+public class SMSUtil {
     private final Client client;
     @Autowired
     private SMSRecordMapper smsRecordMapper;
 
-    public SMS() throws Exception {
+    public SMSUtil() throws Exception {
         Config config = new Config();
         config.accessKeyId = "";
         config.accessKeySecret = "";

@@ -1,5 +1,6 @@
 package com.coolers.housekeep.housekeep.config;
 
+import com.coolers.housekeep.housekeep.share.JWTInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

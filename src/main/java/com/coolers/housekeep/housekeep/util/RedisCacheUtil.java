@@ -8,15 +8,15 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class RedisCacheValueSerializer extends GenericJackson2JsonRedisSerializer {
-    public RedisCacheValueSerializer() {
+public class RedisCacheUtil extends GenericJackson2JsonRedisSerializer {
+    public RedisCacheUtil() {
         super();
     }
 
     @Override
     public Object deserialize(byte[] source) throws SerializationException {
         Object value = super.deserialize(source);
-        if (Method.isNotEmptyObject(value) && value instanceof String str) {
+        if (BaseUtil.isNotEmptyObject(value) && value instanceof String str) {
             if (str.length() == 10) {
                 return LocalDate.parse(str, DateTimeFormatter.ofPattern(FormatConst.yyyy_MM_dd));
             }

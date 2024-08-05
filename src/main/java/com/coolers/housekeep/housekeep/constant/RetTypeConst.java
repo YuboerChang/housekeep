@@ -1,6 +1,6 @@
 package com.coolers.housekeep.housekeep.constant;
 
-public class RetType {
+public class RetTypeConst {
     /**
      * 业务异常
      */

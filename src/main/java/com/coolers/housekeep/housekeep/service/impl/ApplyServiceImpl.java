@@ -10,7 +10,7 @@ import com.coolers.housekeep.housekeep.po.ApplyExample;
 import com.coolers.housekeep.housekeep.po.ApplyStep;
 import com.coolers.housekeep.housekeep.po.ApplyStepExample;
 import com.coolers.housekeep.housekeep.service.ApplyService;
-import com.coolers.housekeep.housekeep.util.Method;
+import com.coolers.housekeep.housekeep.util.BaseUtil;
 import com.coolers.housekeep.housekeep.vo.ApplyReq;
 import com.coolers.housekeep.housekeep.vo.ApplyRes;
 import org.springframework.beans.BeanUtils;
@@ -38,7 +38,7 @@ public class ApplyServiceImpl implements ApplyService {
     public ApplyRes queryApply(ApplyReq req) {
         ApplyRes res = new ApplyRes();
         Page page = new Page(req.getPageNum(), req.getPageSize());
-        if (Method.isEmptyMathObject(req.getId())) {
+        if (BaseUtil.isEmptyMathObject(req.getId())) {
             ApplyExample applyExample = new ApplyExample();
             res.setTotal(applyMapper.countByExample(applyExample));
             res.setApplyList(applyCustomMapper.selectByExampleAndPage(page, applyExample));

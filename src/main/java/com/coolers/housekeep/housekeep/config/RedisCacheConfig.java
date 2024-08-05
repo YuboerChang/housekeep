@@ -1,6 +1,6 @@
 package com.coolers.housekeep.housekeep.config;
 
-import com.coolers.housekeep.housekeep.util.RedisCacheValueSerializer;
+import com.coolers.housekeep.housekeep.util.RedisCacheUtil;
 import com.coolers.housekeep.housekeep.util.RedisUtil;
 import org.springframework.boot.autoconfigure.cache.CacheProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -82,7 +82,7 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
      * @return RedisCacheConfiguration
      */
     RedisCacheConfiguration redisCacheConfiguration(CacheProperties.Redis redisCacheProperties) {
-        RedisCacheConfiguration cacheConfig = RedisCacheConfiguration.defaultCacheConfig().serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new RedisCacheValueSerializer()));
+        RedisCacheConfiguration cacheConfig = RedisCacheConfiguration.defaultCacheConfig().serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new RedisCacheUtil()));
         if (redisCacheProperties.getTimeToLive() != null) {
             cacheConfig = cacheConfig.entryTtl(redisCacheProperties.getTimeToLive());
         }

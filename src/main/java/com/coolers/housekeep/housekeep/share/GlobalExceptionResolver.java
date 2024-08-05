@@ -1,8 +1,8 @@
-package com.coolers.housekeep.housekeep.config;
+package com.coolers.housekeep.housekeep.share;
 
 import com.coolers.housekeep.housekeep.constant.FormatConst;
-import com.coolers.housekeep.housekeep.constant.RetMessage;
-import com.coolers.housekeep.housekeep.constant.RetType;
+import com.coolers.housekeep.housekeep.constant.RetMsgConst;
+import com.coolers.housekeep.housekeep.constant.RetTypeConst;
 import com.coolers.housekeep.housekeep.dto.BussinessException;
 import com.coolers.housekeep.housekeep.vo.BaseRes;
 import jakarta.servlet.http.HttpServletRequest;
@@ -39,8 +39,8 @@ public class GlobalExceptionResolver extends DefaultErrorAttributes {
             res.setType(((BussinessException) ex).getErrorType());
             res.setMsg(((BussinessException) ex).getErrorMessage());
         } else {
-            res.setType(RetType.SYSTEM_ERR);
-            res.setMsg(RetMessage.SYS_ERR);
+            res.setType(RetTypeConst.SYSTEM_ERR);
+            res.setMsg(RetMsgConst.SYS_ERR);
         }
         return res;
     }
