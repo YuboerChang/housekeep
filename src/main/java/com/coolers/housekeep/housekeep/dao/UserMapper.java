@@ -2,9 +2,7 @@ package com.coolers.housekeep.housekeep.dao;
 
 import com.coolers.housekeep.housekeep.po.User;
 import com.coolers.housekeep.housekeep.po.UserExample;
-
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {

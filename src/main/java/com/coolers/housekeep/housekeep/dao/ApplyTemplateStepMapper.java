@@ -3,9 +3,7 @@ package com.coolers.housekeep.housekeep.dao;
 import com.coolers.housekeep.housekeep.po.ApplyTemplateStep;
 import com.coolers.housekeep.housekeep.po.ApplyTemplateStepExample;
 import com.coolers.housekeep.housekeep.po.ApplyTemplateStepKey;
-
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 
 public interface ApplyTemplateStepMapper {

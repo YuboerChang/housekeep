@@ -1,296 +1,291 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.coolers.housekeep.housekeep.dao.ApplyStepMapper">
-    <resultMap id="BaseResultMap" type="com.coolers.housekeep.housekeep.po.ApplyStep">
-        <id column="apply_id" jdbcType="INTEGER" property="applyId"/>
-        <id column="step_id" jdbcType="TINYINT" property="stepId"/>
-        <result column="worker" jdbcType="INTEGER" property="worker"/>
-        <result column="opinion" jdbcType="VARCHAR" property="opinion"/>
-        <result column="un_read" jdbcType="VARCHAR" property="unRead"/>
-        <result column="is_finish" jdbcType="BIT" property="isFinish"/>
-        <result column="has_read" jdbcType="VARCHAR" property="hasRead"/>
-        <result column="introduce" jdbcType="VARCHAR" property="introduce"/>
-        <result column="template_step_id" jdbcType="TINYINT" property="templateStepId"/>
-        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
-    </resultMap>
-    <sql id="Example_Where_Clause">
-        <where>
-            <foreach collection="oredCriteria" item="criteria" separator="or">
-                <if test="criteria.valid">
-                    <trim prefix="(" prefixOverrides="and" suffix=")">
-                        <foreach collection="criteria.criteria" item="criterion">
-                            <choose>
-                                <when test="criterion.noValue">
-                                    and ${criterion.condition}
-                                </when>
-                                <when test="criterion.singleValue">
-                                    and ${criterion.condition} #{criterion.value}
-                                </when>
-                                <when test="criterion.betweenValue">
-                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                                </when>
-                                <when test="criterion.listValue">
-                                    and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
-                                             separator=",">
-                                        #{listItem}
-                                    </foreach>
-                                </when>
-                            </choose>
-                        </foreach>
-                    </trim>
-                </if>
+  <resultMap id="BaseResultMap" type="com.coolers.housekeep.housekeep.po.ApplyStep">
+    <id column="apply_id" jdbcType="INTEGER" property="applyId" />
+    <id column="step_id" jdbcType="TINYINT" property="stepId" />
+    <result column="worker" jdbcType="INTEGER" property="worker" />
+    <result column="opinion" jdbcType="VARCHAR" property="opinion" />
+    <result column="un_read" jdbcType="VARCHAR" property="unRead" />
+    <result column="is_finish" jdbcType="BIT" property="isFinish" />
+    <result column="has_read" jdbcType="VARCHAR" property="hasRead" />
+    <result column="introduce" jdbcType="VARCHAR" property="introduce" />
+    <result column="template_step_id" jdbcType="TINYINT" property="templateStepId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
             </foreach>
-        </where>
-    </sql>
-    <sql id="Update_By_Example_Where_Clause">
-        <where>
-            <foreach collection="example.oredCriteria" item="criteria" separator="or">
-                <if test="criteria.valid">
-                    <trim prefix="(" prefixOverrides="and" suffix=")">
-                        <foreach collection="criteria.criteria" item="criterion">
-                            <choose>
-                                <when test="criterion.noValue">
-                                    and ${criterion.condition}
-                                </when>
-                                <when test="criterion.singleValue">
-                                    and ${criterion.condition} #{criterion.value}
-                                </when>
-                                <when test="criterion.betweenValue">
-                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                                </when>
-                                <when test="criterion.listValue">
-                                    and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
-                                             separator=",">
-                                        #{listItem}
-                                    </foreach>
-                                </when>
-                            </choose>
-                        </foreach>
-                    </trim>
-                </if>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
             </foreach>
-        </where>
-    </sql>
-    <sql id="Base_Column_List">
-        apply_id, step_id, worker, opinion, un_read, is_finish, has_read, introduce, template_step_id,
-        create_time
-    </sql>
-    <select id="selectByExample" parameterType="com.coolers.housekeep.housekeep.po.ApplyStepExample"
-            resultMap="BaseResultMap">
-        select
-        <if test="distinct">
-            distinct
+          </trim>
         </if>
-        <include refid="Base_Column_List"/>
-        from apply_step
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-        <if test="orderByClause != null">
-            order by ${orderByClause}
-        </if>
-    </select>
-    <select id="selectByPrimaryKey" parameterType="com.coolers.housekeep.housekeep.po.ApplyStepKey"
-            resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from apply_step
-        where apply_id = #{applyId,jdbcType=INTEGER}
-        and step_id = #{stepId,jdbcType=TINYINT}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="com.coolers.housekeep.housekeep.po.ApplyStepKey">
-        delete from apply_step
-        where apply_id = #{applyId,jdbcType=INTEGER}
-        and step_id = #{stepId,jdbcType=TINYINT}
-    </delete>
-    <delete id="deleteByExample" parameterType="com.coolers.housekeep.housekeep.po.ApplyStepExample">
-        delete from apply_step
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-    </delete>
-    <insert id="insert" parameterType="com.coolers.housekeep.housekeep.po.ApplyStep">
-        insert into apply_step (apply_id, step_id, worker,
-        opinion, un_read, is_finish,
-        has_read, introduce, template_step_id,
-        create_time)
-        values (#{applyId,jdbcType=INTEGER}, #{stepId,jdbcType=TINYINT}, #{worker,jdbcType=INTEGER},
-        #{opinion,jdbcType=VARCHAR}, #{unRead,jdbcType=VARCHAR}, #{isFinish,jdbcType=BIT},
-        #{hasRead,jdbcType=VARCHAR}, #{introduce,jdbcType=VARCHAR}, #{templateStepId,jdbcType=TINYINT},
-        #{createTime,jdbcType=TIMESTAMP})
-    </insert>
-    <insert id="insertSelective" parameterType="com.coolers.housekeep.housekeep.po.ApplyStep">
-        insert into apply_step
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="applyId != null">
-                apply_id,
-            </if>
-            <if test="stepId != null">
-                step_id,
-            </if>
-            <if test="worker != null">
-                worker,
-            </if>
-            <if test="opinion != null">
-                opinion,
-            </if>
-            <if test="unRead != null">
-                un_read,
-            </if>
-            <if test="isFinish != null">
-                is_finish,
-            </if>
-            <if test="hasRead != null">
-                has_read,
-            </if>
-            <if test="introduce != null">
-                introduce,
-            </if>
-            <if test="templateStepId != null">
-                template_step_id,
-            </if>
-            <if test="createTime != null">
-                create_time,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="applyId != null">
-                #{applyId,jdbcType=INTEGER},
-            </if>
-            <if test="stepId != null">
-                #{stepId,jdbcType=TINYINT},
-            </if>
-            <if test="worker != null">
-                #{worker,jdbcType=INTEGER},
-            </if>
-            <if test="opinion != null">
-                #{opinion,jdbcType=VARCHAR},
-            </if>
-            <if test="unRead != null">
-                #{unRead,jdbcType=VARCHAR},
-            </if>
-            <if test="isFinish != null">
-                #{isFinish,jdbcType=BIT},
-            </if>
-            <if test="hasRead != null">
-                #{hasRead,jdbcType=VARCHAR},
-            </if>
-            <if test="introduce != null">
-                #{introduce,jdbcType=VARCHAR},
-            </if>
-            <if test="templateStepId != null">
-                #{templateStepId,jdbcType=TINYINT},
-            </if>
-            <if test="createTime != null">
-                #{createTime,jdbcType=TIMESTAMP},
-            </if>
-        </trim>
-    </insert>
-    <select id="countByExample" parameterType="com.coolers.housekeep.housekeep.po.ApplyStepExample"
-            resultType="java.lang.Long">
-        select count(*) from apply_step
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-    </select>
-    <update id="updateByExampleSelective" parameterType="map">
-        update apply_step
-        <set>
-            <if test="record.applyId != null">
-                apply_id = #{record.applyId,jdbcType=INTEGER},
-            </if>
-            <if test="record.stepId != null">
-                step_id = #{record.stepId,jdbcType=TINYINT},
-            </if>
-            <if test="record.worker != null">
-                worker = #{record.worker,jdbcType=INTEGER},
-            </if>
-            <if test="record.opinion != null">
-                opinion = #{record.opinion,jdbcType=VARCHAR},
-            </if>
-            <if test="record.unRead != null">
-                un_read = #{record.unRead,jdbcType=VARCHAR},
-            </if>
-            <if test="record.isFinish != null">
-                is_finish = #{record.isFinish,jdbcType=BIT},
-            </if>
-            <if test="record.hasRead != null">
-                has_read = #{record.hasRead,jdbcType=VARCHAR},
-            </if>
-            <if test="record.introduce != null">
-                introduce = #{record.introduce,jdbcType=VARCHAR},
-            </if>
-            <if test="record.templateStepId != null">
-                template_step_id = #{record.templateStepId,jdbcType=TINYINT},
-            </if>
-            <if test="record.createTime != null">
-                create_time = #{record.createTime,jdbcType=TIMESTAMP},
-            </if>
-        </set>
-        <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause"/>
-        </if>
-    </update>
-    <update id="updateByExample" parameterType="map">
-        update apply_step
-        set apply_id = #{record.applyId,jdbcType=INTEGER},
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    apply_id, step_id, worker, opinion, un_read, is_finish, has_read, introduce, template_step_id, 
+    create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.coolers.housekeep.housekeep.po.ApplyStepExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from apply_step
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.coolers.housekeep.housekeep.po.ApplyStepKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from apply_step
+    where apply_id = #{applyId,jdbcType=INTEGER}
+      and step_id = #{stepId,jdbcType=TINYINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.coolers.housekeep.housekeep.po.ApplyStepKey">
+    delete from apply_step
+    where apply_id = #{applyId,jdbcType=INTEGER}
+      and step_id = #{stepId,jdbcType=TINYINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.coolers.housekeep.housekeep.po.ApplyStepExample">
+    delete from apply_step
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.coolers.housekeep.housekeep.po.ApplyStep">
+    insert into apply_step (apply_id, step_id, worker, 
+      opinion, un_read, is_finish, 
+      has_read, introduce, template_step_id, 
+      create_time)
+    values (#{applyId,jdbcType=INTEGER}, #{stepId,jdbcType=TINYINT}, #{worker,jdbcType=INTEGER}, 
+      #{opinion,jdbcType=VARCHAR}, #{unRead,jdbcType=VARCHAR}, #{isFinish,jdbcType=BIT}, 
+      #{hasRead,jdbcType=VARCHAR}, #{introduce,jdbcType=VARCHAR}, #{templateStepId,jdbcType=TINYINT}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.coolers.housekeep.housekeep.po.ApplyStep">
+    insert into apply_step
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="applyId != null">
+        apply_id,
+      </if>
+      <if test="stepId != null">
+        step_id,
+      </if>
+      <if test="worker != null">
+        worker,
+      </if>
+      <if test="opinion != null">
+        opinion,
+      </if>
+      <if test="unRead != null">
+        un_read,
+      </if>
+      <if test="isFinish != null">
+        is_finish,
+      </if>
+      <if test="hasRead != null">
+        has_read,
+      </if>
+      <if test="introduce != null">
+        introduce,
+      </if>
+      <if test="templateStepId != null">
+        template_step_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="applyId != null">
+        #{applyId,jdbcType=INTEGER},
+      </if>
+      <if test="stepId != null">
+        #{stepId,jdbcType=TINYINT},
+      </if>
+      <if test="worker != null">
+        #{worker,jdbcType=INTEGER},
+      </if>
+      <if test="opinion != null">
+        #{opinion,jdbcType=VARCHAR},
+      </if>
+      <if test="unRead != null">
+        #{unRead,jdbcType=VARCHAR},
+      </if>
+      <if test="isFinish != null">
+        #{isFinish,jdbcType=BIT},
+      </if>
+      <if test="hasRead != null">
+        #{hasRead,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null">
+        #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="templateStepId != null">
+        #{templateStepId,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.coolers.housekeep.housekeep.po.ApplyStepExample" resultType="java.lang.Long">
+    select count(*) from apply_step
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update apply_step
+    <set>
+      <if test="record.applyId != null">
+        apply_id = #{record.applyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.stepId != null">
         step_id = #{record.stepId,jdbcType=TINYINT},
+      </if>
+      <if test="record.worker != null">
         worker = #{record.worker,jdbcType=INTEGER},
+      </if>
+      <if test="record.opinion != null">
         opinion = #{record.opinion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unRead != null">
         un_read = #{record.unRead,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isFinish != null">
         is_finish = #{record.isFinish,jdbcType=BIT},
+      </if>
+      <if test="record.hasRead != null">
         has_read = #{record.hasRead,jdbcType=VARCHAR},
+      </if>
+      <if test="record.introduce != null">
         introduce = #{record.introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.templateStepId != null">
         template_step_id = #{record.templateStepId,jdbcType=TINYINT},
-        create_time = #{record.createTime,jdbcType=TIMESTAMP}
-        <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause"/>
-        </if>
-    </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.coolers.housekeep.housekeep.po.ApplyStep">
-        update apply_step
-        <set>
-            <if test="worker != null">
-                worker = #{worker,jdbcType=INTEGER},
-            </if>
-            <if test="opinion != null">
-                opinion = #{opinion,jdbcType=VARCHAR},
-            </if>
-            <if test="unRead != null">
-                un_read = #{unRead,jdbcType=VARCHAR},
-            </if>
-            <if test="isFinish != null">
-                is_finish = #{isFinish,jdbcType=BIT},
-            </if>
-            <if test="hasRead != null">
-                has_read = #{hasRead,jdbcType=VARCHAR},
-            </if>
-            <if test="introduce != null">
-                introduce = #{introduce,jdbcType=VARCHAR},
-            </if>
-            <if test="templateStepId != null">
-                template_step_id = #{templateStepId,jdbcType=TINYINT},
-            </if>
-            <if test="createTime != null">
-                create_time = #{createTime,jdbcType=TIMESTAMP},
-            </if>
-        </set>
-        where apply_id = #{applyId,jdbcType=INTEGER}
-        and step_id = #{stepId,jdbcType=TINYINT}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.coolers.housekeep.housekeep.po.ApplyStep">
-        update apply_step
-        set worker = #{worker,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update apply_step
+    set apply_id = #{record.applyId,jdbcType=INTEGER},
+      step_id = #{record.stepId,jdbcType=TINYINT},
+      worker = #{record.worker,jdbcType=INTEGER},
+      opinion = #{record.opinion,jdbcType=VARCHAR},
+      un_read = #{record.unRead,jdbcType=VARCHAR},
+      is_finish = #{record.isFinish,jdbcType=BIT},
+      has_read = #{record.hasRead,jdbcType=VARCHAR},
+      introduce = #{record.introduce,jdbcType=VARCHAR},
+      template_step_id = #{record.templateStepId,jdbcType=TINYINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.coolers.housekeep.housekeep.po.ApplyStep">
+    update apply_step
+    <set>
+      <if test="worker != null">
+        worker = #{worker,jdbcType=INTEGER},
+      </if>
+      <if test="opinion != null">
         opinion = #{opinion,jdbcType=VARCHAR},
+      </if>
+      <if test="unRead != null">
         un_read = #{unRead,jdbcType=VARCHAR},
+      </if>
+      <if test="isFinish != null">
         is_finish = #{isFinish,jdbcType=BIT},
+      </if>
+      <if test="hasRead != null">
         has_read = #{hasRead,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null">
         introduce = #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="templateStepId != null">
         template_step_id = #{templateStepId,jdbcType=TINYINT},
-        create_time = #{createTime,jdbcType=TIMESTAMP}
-        where apply_id = #{applyId,jdbcType=INTEGER}
-        and step_id = #{stepId,jdbcType=TINYINT}
-    </update>
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where apply_id = #{applyId,jdbcType=INTEGER}
+      and step_id = #{stepId,jdbcType=TINYINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.coolers.housekeep.housekeep.po.ApplyStep">
+    update apply_step
+    set worker = #{worker,jdbcType=INTEGER},
+      opinion = #{opinion,jdbcType=VARCHAR},
+      un_read = #{unRead,jdbcType=VARCHAR},
+      is_finish = #{isFinish,jdbcType=BIT},
+      has_read = #{hasRead,jdbcType=VARCHAR},
+      introduce = #{introduce,jdbcType=VARCHAR},
+      template_step_id = #{templateStepId,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where apply_id = #{applyId,jdbcType=INTEGER}
+      and step_id = #{stepId,jdbcType=TINYINT}
+  </update>
 </mapper>

@@ -56,6 +56,7 @@
         <table tableName="apply_template_step" domainObjectName="ApplyTemplateStep"/>
         <table tableName="user" domainObjectName="User"/>
         <table tableName="sms_record" domainObjectName="SMSRecord"/>
+        <table tableName="web_log" domainObjectName="WebLog"/>
 
     </context>
 </generatorConfiguration>
