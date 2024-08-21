@@ -7,7 +7,6 @@
     <result column="ip" jdbcType="VARCHAR" property="ip" />
     <result column="api_id" jdbcType="VARCHAR" property="apiId" />
     <result column="res_type" jdbcType="VARCHAR" property="resType" />
-    <result column="err_msg" jdbcType="VARCHAR" property="errMsg" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.coolers.housekeep.housekeep.po.WebLogWithBLOBs">
@@ -73,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_id, ip, api_id, res_type, err_msg, create_time
+    id, user_id, ip, api_id, res_type, create_time
   </sql>
   <sql id="Blob_Column_List">
     req_params, res_params
@@ -128,13 +127,11 @@
   </delete>
   <insert id="insert" parameterType="com.coolers.housekeep.housekeep.po.WebLogWithBLOBs">
     insert into web_log (id, user_id, ip, 
-      api_id, res_type, err_msg, 
-      create_time, req_params, res_params
-      )
+      api_id, res_type, create_time, 
+      req_params, res_params)
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, 
-      #{apiId,jdbcType=VARCHAR}, #{resType,jdbcType=VARCHAR}, #{errMsg,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{reqParams,jdbcType=LONGVARCHAR}, #{resParams,jdbcType=LONGVARCHAR}
-      )
+      #{apiId,jdbcType=VARCHAR}, #{resType,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{reqParams,jdbcType=LONGVARCHAR}, #{resParams,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.coolers.housekeep.housekeep.po.WebLogWithBLOBs">
     insert into web_log
@@ -153,9 +150,6 @@
       </if>
       <if test="resType != null">
         res_type,
-      </if>
-      <if test="errMsg != null">
-        err_msg,
       </if>
       <if test="createTime != null">
         create_time,
@@ -182,9 +176,6 @@
       </if>
       <if test="resType != null">
         #{resType,jdbcType=VARCHAR},
-      </if>
-      <if test="errMsg != null">
-        #{errMsg,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -221,9 +212,6 @@
       <if test="record.resType != null">
         res_type = #{record.resType,jdbcType=VARCHAR},
       </if>
-      <if test="record.errMsg != null">
-        err_msg = #{record.errMsg,jdbcType=VARCHAR},
-      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
@@ -245,7 +233,6 @@
       ip = #{record.ip,jdbcType=VARCHAR},
       api_id = #{record.apiId,jdbcType=VARCHAR},
       res_type = #{record.resType,jdbcType=VARCHAR},
-      err_msg = #{record.errMsg,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       req_params = #{record.reqParams,jdbcType=LONGVARCHAR},
       res_params = #{record.resParams,jdbcType=LONGVARCHAR}
@@ -260,7 +247,6 @@
       ip = #{record.ip,jdbcType=VARCHAR},
       api_id = #{record.apiId,jdbcType=VARCHAR},
       res_type = #{record.resType,jdbcType=VARCHAR},
-      err_msg = #{record.errMsg,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -281,9 +267,6 @@
       <if test="resType != null">
         res_type = #{resType,jdbcType=VARCHAR},
       </if>
-      <if test="errMsg != null">
-        err_msg = #{errMsg,jdbcType=VARCHAR},
-      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -302,7 +285,6 @@
       ip = #{ip,jdbcType=VARCHAR},
       api_id = #{apiId,jdbcType=VARCHAR},
       res_type = #{resType,jdbcType=VARCHAR},
-      err_msg = #{errMsg,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       req_params = #{reqParams,jdbcType=LONGVARCHAR},
       res_params = #{resParams,jdbcType=LONGVARCHAR}
@@ -314,7 +296,6 @@
       ip = #{ip,jdbcType=VARCHAR},
       api_id = #{apiId,jdbcType=VARCHAR},
       res_type = #{resType,jdbcType=VARCHAR},
-      err_msg = #{errMsg,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>

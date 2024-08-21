@@ -13,8 +13,6 @@ public class WebLog {
 
     private String resType;
 
-    private String errMsg;
-
     private Date createTime;
 
     public Integer getId() {
@@ -55,14 +53,6 @@ public class WebLog {
 
     public void setResType(String resType) {
         this.resType = resType == null ? null : resType.trim();
-    }
-
-    public String getErrMsg() {
-        return errMsg;
-    }
-
-    public void setErrMsg(String errMsg) {
-        this.errMsg = errMsg == null ? null : errMsg.trim();
     }
 
     public Date getCreateTime() {
