@@ -1,12 +1,10 @@
-这是一个管理系统，比较缝合，可能想到什么有用的功能就写，也没太多的针对性，需要的功能可以自己拆解去用，也欢迎往上添加新功能。
-业余玩家，代码有空就写。
+这个项目主要是用于公司流程管理的。用户通过编辑流程模板，生成自定义事务流程的处理模板，其他用户就可以通过这个模板发起事务流程。比如某个管理员用户设定了一个员工请假的流程模板，里面设置了流请假程的处理步骤和处理人员，其他员工就可以通过这个模板，提起请假流程。
 
-项目相关的业务设计写在CSDN博客里。用户ID Yubochang，放在“项目相关”的专栏里。
-URL:
-https://blog.csdn.net/yubochang/category_12684582.html?spm=1001.2014.3001.5482
+主要功能：
 
-前端代码仓库URL：
-https://github.com/YuboerChang/housekeep-frontend
+用户管理
+流程模板管理
+流程管理
 
-后端代码仓库URL：
-https://github.com/YuboerChang/housekeep
+更多项目相关请点击跳转至CSDN博客：
+https://blog.csdn.net/Yubochang/article/details/139243487?fromshare=blogdetail&sharetype=blogdetail&sharerId=139243487&sharerefer=PC&sharesource=Yubochang&sharefrom=from_link
